@@ -9,7 +9,7 @@ namespace MvcApplication1.Models
     public class UserModel
     {
         private string connStr = "";
-        public string[] GetUserNames()
+        public List<string> GetUserNames()
         {
 
             SqlConnection myConn = new SqlConnection(connStr);
@@ -20,7 +20,7 @@ namespace MvcApplication1.Models
                
             
            SqlDataReader reader = command.ExecuteReader();
-            List<String> emails = new List<string>();
+            List<string> emails = new List<string>();
             while (reader.Read())
             {
 
@@ -28,8 +28,25 @@ namespace MvcApplication1.Models
 
             }
 
-            return emails.ToArray();
+            return emails;
           
         }
+        public int GetUserCount()
+        {
+            SqlConnection myConn = new SqlConnection(connStr);
+            myConn.Open();
+
+            SqlCommand command = myConn.CreateCommand();
+            command.CommandText = "SELECT COUNT(*) FROM USER";
+            
+            int count = Convert.ToInt32( command.ExecuteScalar() );
+             return count;
+        }
+    
+    
+    
     }
+
+
+
 }
