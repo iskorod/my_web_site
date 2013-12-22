@@ -8,7 +8,7 @@ namespace MvcApplication1.Models
 {
     public class UserModel
     {
-        private string connStr = "";
+        private string connStr = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Public\my_web_site\MvcApplication\MvcApplication1\App_Data\MainDb1.mdf;Integrated Security=True";
         public List<string> GetUserEmails()
         {
 
@@ -37,7 +37,7 @@ namespace MvcApplication1.Models
             myConn.Open();
 
             SqlCommand command = myConn.CreateCommand();
-            command.CommandText = "SELECT COUNT(*) FROM USER";
+            command.CommandText = "SELECT COUNT(*) FROM [USER]";
             
             int count = Convert.ToInt32( command.ExecuteScalar() );
              return count;
